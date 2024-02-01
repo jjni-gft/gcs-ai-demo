@@ -1,0 +1,65 @@
+name: Create and merge PR
+
+on:
+  push:
+    branches:
+      - pasang # trigger the workflow when changes are pushed to pasang branch
+
+jobs:
+  GFT-AI-Impact-Code-Review-and-Fix:
+    runs-on: self-hosted # use self-hosted as we do not have access to GitHub Actions hosted runners
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        # ADD AN IF STATEMENT HERE TO CHECK IF THE CODE REVIEW AND FIX STEP WAS SUCCESSFUL
+        uses: peter-evans/create-pull-request@v3 # Using GitHub Action community action to create PR
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update from pasang branch
+          title: Update from pasang branch
+          branch: 'pasang-pr' # creates a branch pasang-pr to pull changes from pasang branch
+          base: 'main'
+          delete-branch: true # deletes the branch pasang-pr after merging
+          merge-method: 'squash'
+        # remove code merge 
+      - name: GFT AImpact code review and fix
+        run: |
+          echo "Running code review..." # do not need this before hand if we want to just run code review then create a different pipeline for this
+          echo "Running code fix..." # code fix runs code review inatley 
+          # Add my own logic here to determine whether the step was successful or not
+
+# add seperate step for code merge after collecting pull request number
+
+  Terraform:
+    runs-on: self-hosted
+    needs: GFT-AI-Impact-Code-Review-and-Fix
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.0
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: /Users/pgsp/POC/ai-demo
+
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: /Users/pgsp/POC/ai-demo
+
+      - name: Terraform Plan
+        run: terraform plan
+        working-directory: /Users/pgsp/POC/ai-demo
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: /Users/pgsp/POC/ai-demo
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
