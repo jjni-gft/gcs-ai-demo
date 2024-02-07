@@ -4,12 +4,12 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "bucket" {
-  name                        = "ai-demo-bucket-${random_id.random.hex}"
+  name                        = "ai-demo-bucket-${random_id.bucket_id.hex}"
   location                    = "EU"
   uniform_bucket_level_access = true
 }
 
-resource "random_id" "random" {
+resource "random_id" "bucket_id" {
   byte_length = 4
 }
 #test
