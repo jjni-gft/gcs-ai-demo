@@ -10,10 +10,10 @@ resource "google_storage_bucket" "bucket" {
   versioning {
     enabled = true
   }
-  logging {
-    log_bucket        = "ai-demo-logs-bucket-${random_id.random.hex}"
-    log_object_prefix = "logs"
-  }
+  # logging {
+  #   log_bucket        = "ai-demo-logs-bucket-${random_id.random.hex}"
+  #   log_object_prefix = "logs"
+  # }
 }
 
 resource "random_id" "random" {
