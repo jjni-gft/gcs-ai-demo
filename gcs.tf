@@ -12,3 +12,4 @@ resource "google_storage_bucket" "bucket" {
 resource "random_id" "random" {
   byte_length = 4
 }
+#test
