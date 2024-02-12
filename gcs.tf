@@ -1,11 +1,10 @@
 provider "google" {
   project = "dev-env-1-412811"
-  region  = "europe-west1"
 }
 
 resource "google_storage_bucket" "bucket" {
   name     = "my-bucket-1672"
-  location = "EU"
+
 
   uniform_bucket_level_access = true
 
