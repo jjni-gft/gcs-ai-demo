@@ -8,6 +8,7 @@ on:
 jobs:
   Terraform:
     runs-on: self-hosted
+    if: contains(github.event.head_commit.message, 'deploy')
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -40,8 +41,11 @@ jobs:
           terraform apply -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-      
+  AutoDoc:
+    runs-on: self-hosted
+    if: contains(github.event.head_commit.message, 'deploy')
+    steps:
       - name: GFT Auto Doc
         run: |
           cd /Users/pgsp/POC/gcs-ai-demo
-            gft autodoc --config_path /Users/pgsp/POC/gft-aimpact-cli.uk/configfiles/autodoc/config-sample.yaml
+          gft autodoc --config_path /Users/pgsp/POC/gft-aimpact-cli.uk/configfiles/autodoc/config-sample.yaml
