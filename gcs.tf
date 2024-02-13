@@ -19,3 +19,4 @@ resource "google_storage_bucket" "bucket" {
     log_object_prefix = "log"
   }
 }
+#test
