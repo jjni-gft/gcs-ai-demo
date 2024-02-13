@@ -59,4 +59,3 @@ jobs:
         run: |
           cd /Users/pgsp/POC/gcs-ai-demo
           gft autodoc --config_path /Users/pgsp/POC/gft-aimpact-cli.uk/configfiles/autodoc/config-sample.yaml
-#test
