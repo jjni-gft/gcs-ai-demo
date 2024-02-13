@@ -42,7 +42,6 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
   AutoDoc:
-    needs: Terraform
     runs-on: self-hosted
     if: contains(github.event.head_commit.message, 'autodoc')
     steps:
