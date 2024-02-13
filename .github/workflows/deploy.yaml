@@ -42,9 +42,19 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
   AutoDoc:
+    needs: Terraform
     runs-on: self-hosted
-    if: contains(github.event.head_commit.message, 'deploy')
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check and delete directory
+        run: |
+          DIR="/var/folders/cg/gf482pl51873tswm82_2fxxjjxxrj0/T/Pasang-GFT-gcs-ai-demo"
+          if [[ -d "$DIR" && -n "$(ls -A $DIR)" ]]; then
+            sudo rm -rf $DIR
+          fi
+
       - name: GFT Auto Doc
         run: |
           cd /Users/pgsp/POC/gcs-ai-demo
