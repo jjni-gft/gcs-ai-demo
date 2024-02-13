@@ -53,7 +53,7 @@ jobs:
         run: |
           DIR="/var/folders/cg/gf482pl51873tswm82_2fxxjjxxrj0/T/Pasang-GFT-gcs-ai-demo"
           if [[ -d "$DIR" && -n "$(ls -A $DIR)" ]]; then
-            sudo rm -rf $DIR
+            rm -rf $DIR
           fi
 
       - name: GFT Auto Doc
