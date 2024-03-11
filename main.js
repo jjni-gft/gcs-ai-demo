@@ -2,4 +2,4 @@ function greet(name) {
     console.log(`Hello, ${name}!`);
 }
 
-greet("Harry Potter");
+greet("Harry Potter"
