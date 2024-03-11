@@ -22,7 +22,7 @@ def get_website_status(url):
     # Use the get function from the requests library.
     response = requests.get(url)
     # Return the status code from the response.
-    return response.status_code
+    return response.status_cod
 
 # The main execution of the script.
 if __name__ == "__main__":
@@ -32,5 +32,3 @@ if __name__ == "__main__":
     print(get_python_version())
     # Print the status code of the Google homepage.
     print(get_website_status("https://www.google.com"))
-
-//test
