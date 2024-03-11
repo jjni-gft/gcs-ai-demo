@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Hello World</title>
-</head>
 <body>
-    <h1>Hello, Harry Potter!</h1>
+
+<h2>JavaScript Alert XSS Vulnerability</h2>
+
+<button onclick="xssFunction()">Try it</button>
+
+<script>
+function xssFunction() {
+  var userInput = prompt("Please enter your name", "Harry Potter");
+  document.getElementById("demo").innerHTML = userInput;
+}
+</script>
+
+<p id="demo"></p>
+
 </body>
 </html>
