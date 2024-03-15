@@ -3,12 +3,12 @@ provider "google" {
   region         = "us-central1"
 }
 
-resource "random_id" "bucket_id" {
-  byte_length = 8
+resource "random_id" "bucket_id_suffix" {
+  byte_length = 2
 }
 
 resource "google_storage_bucket" "bucket" {
-  name     = "my-bucket-${random_id.bucket_id.hex}"
+  name     = "my-bucket-${random_id.bucket_id_suffix.hex}"
   project  = "dev-env-1-412811"
   location = "US"
 }
