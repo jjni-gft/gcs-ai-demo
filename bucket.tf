@@ -10,5 +10,5 @@ resource "random_id" "bucket_id_suffix" {
 resource "google_storage_bucket" "bucket" {
   name     = "my-bucket-${random_id.bucket_id_suffix.hex}"
   project  = "dev-env-1-412811"
-  location = 
+  location = "US"
 }
